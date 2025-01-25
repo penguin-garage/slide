@@ -314,156 +314,86 @@ table thead th {
 }
 
 section {
-  font-size: 25px;
-  font-family: "Lato", sans-serif;
-  letter-spacing: 0.5px;
-  padding: 20px;
-  color: var(--foreground);
-  background-color: var(--background);
-}
-section > *:first-child,
-section > header:first-child + * {
-  margin-top: 0;
-}
-section > h2 + * {
-  /* h2の直後の要素の上の余白を調整 */
-  margin-top: 0.5em;
-}
-section a,
-section mark {
-  color: var(--cyan);
-  text-decoration: none;
-}
-a:hover,
-a:active,
-a:focus {
-  text-decoration: underline;
-}
-section code {
-  background: var(--current-line);
-  color: var(--purple);
-}
-section h1 strong,
-section h2 strong,
-section h3 strong,
-section h4 strong,
-section h5 strong,
-section h6 strong {
-  color: var(--cyan);
-}
-section pre > code {
-  background: var(--current-line);
-}
-section header,
-section footer,
-section section::after,
-section blockquote::before,
-section blockquote::after {
-  color: var(--cyan);
-}
-
-header,
-footer,
-section::after {
-  box-sizing: border-box;
-  font-size: 66%;
-  height: 70px;
-  line-height: 50px;
-  overflow: hidden;
-  padding: 10px 25px;
-  position: absolute;
-}
-
-header {
-  right: 0;
-  top: 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-footer {
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 10px;
-  line-height: 10px;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  padding: 0;
-  overflow: hidden;
-  font-family: "Noto Sans JP", sans-serif;
-}
-
-footer::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 10px;
-  background: linear-gradient(
-    to right,
-    #fe4f5c 0%,
-    #fe4f5c 25%,
-    #2e63d9 25%,
-    #2e63d9 50%,
-    #ffe103 50%,
-    #ffe103 75%,
-    #74dbd6 75%,
-    #74dbd6 100%
-  );
-}
-
-footer a,
-footer p {
-  display: none;
-}
-
-section {
-  @extend .markdown-body;
-
-  align-items: stretch;
-  background: var(--background);
+  /* 基本レイアウト */
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-  font-size: 25px;
-  height: 720px;
-  justify-content: top;
-  padding: 30px 60px;
+  justify-content: flex-start;
+  align-items: stretch;
+  
+  /* サイズと余白 */
   width: 1280px;
+  height: 720px;
+  padding: 40px 60px;
+  
+  /* フォント設定 */
+  font-family: "Noto Sans JP", "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  font-size: 28px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  
+  /* 色設定 */
+  color: var(--foreground);
+  background-color: var(--background);
 
-  > *:last-child,
-  &[data-footer] > :nth-last-child(2) {
-    margin-bottom: 0;
-  }
+  /* コンテンツ配置 */
+  position: relative;
+  overflow: hidden;
 
+  /* 子要素のマージン設定 */
   > *:first-child,
   > header:first-child + * {
     margin-top: 0;
   }
 
-  &::after {
-    position: absolute;
-    padding: 0;
-    right: 30px;
-    bottom: 21px;
-    font-size: 24px;
-    color: var(--cyan);
+  > *:last-child {
+    margin-bottom: 0;
   }
 
+  /* ページ番号 */
+  &::after {
+    content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    font-size: 16px;
+    color: var(--cyan);
+    font-family: "Noto Sans JP", sans-serif;
+  }
+
+  /* 反転テーマ */
   &.invert {
     background-color: var(--foreground);
     color: var(--background);
 
     &::after {
-      color: #999;
+      color: var(--background);
     }
+  }
 
-    img {
-      background-color: transparent;
+  /* タイトルスライド用 */
+  &.title {
+    justify-content: center;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--background);
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+      color: var(--background);
+    }
+  }
+
+  /* セクションスライド用 */
+  &.section {
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--background);
+
+    h1 {
+      font-size: 2.2em;
+      color: var(--background);
     }
   }
 }
@@ -487,13 +417,6 @@ table td {
   background: transparent !important;
 }
 
-/* 基本スタイル */
-section {
-  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-  padding: 40px;
-  color: var(--text-color);
-}
-
 /* 表紙スライド */
 section.title {
   background-color: var(--secondary-color);
@@ -514,7 +437,7 @@ section.title .date {
 
 /* セクションタイトルスライド */
 section.section {
-  background-color: var(--primary-color);
+  background-color: rgb(19, 53, 83);
   color: white;
   display: flex;
   align-items: center;
@@ -523,6 +446,11 @@ section.section {
 
 section.section h1 {
   font-size: 2.2em;
+  color: #c6e5e7;
+}
+
+section.section h2, section.section h3, section.section h4, section.section h5, section.section h6 {
+  color: #fff;
 }
 
 /* 通常スライド */
