@@ -428,6 +428,8 @@ section.title {
 section.title h1 {
   font-size: 2.5em;
   margin-bottom: 0.5em;
+  line-height: 1.2; /* 行間を狭める */
+  margin: 0.2em 0; /* 上下マージンも調整 */
 }
 
 section.title .date {
@@ -461,7 +463,7 @@ section.slide {
 section.slide h1 {
   font-size: 1.8em;
   color: var(--primary-color);
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 
 /* フッター */
@@ -481,4 +483,28 @@ section::after {
   left: 20px;
   font-size: 0.8em;
   color: #666;
+}
+
+/* 印刷時のスタイル */
+@media print {
+  @page {
+    size: 1280px 720px;  /* 16:9サイズに戻す */
+    margin: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  section {
+    page-break-before: always;
+    margin: 0;
+    padding: 40px 60px;
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+  }
 }
