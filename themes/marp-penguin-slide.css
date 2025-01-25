@@ -466,6 +466,17 @@ section.slide h1 {
   margin-bottom: 0.5em;
 }
 
+/* p要素の余白を調整 */
+section.slide p {
+  margin-top: 0.8em;     /* 上の余白を追加 */
+  margin-bottom: 0.8em;  /* 下の余白を維持 */
+}
+
+/* h3の後のp要素の余白を小さく */
+section.slide h3 + p {
+  margin-top: 0.2em;     /* h3の後のpの上余白を小さく */
+}
+
 /* フッター */
 section::after {
   content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
