@@ -1,0 +1,6 @@
+tunnel: penguin-slide
+credentials-file: ~/.cloudflared/credentials.json
+
+ingress:
+  - service: http://localhost:8080
+  - service: http_status:404 

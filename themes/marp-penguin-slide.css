@@ -1,0 +1,556 @@
+@charset "UTF-8";
+/*!
+ * Marp theme
+ * @theme hahnec
+ * @author Christopher Hahne
+ *
+ * @auto-scaling true
+ * @size 4:3 960px 720px
+ * @size 16:9 1280px 720px
+ */
+/*
+@import 'default';
+
+@import '~github-markdown-css';
+@import '~highlight.js/styles/github-gist';
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+:root {
+  --background: #ffffff;
+  --current-line: #f8f8f8;
+  --foreground: #333333;
+  --comment: #6c757d;
+  --cyan: #0056b3;
+  --green: #28a745;
+  --orange: #fd7e14;
+  --pink: #e83e8c;
+  --purple: #6f42c1;
+  --red: #dc3545;
+  --yellow: #ffc107;
+  --white: #ffffff;
+  --link-color: #0056b3;
+  --link-hover-color: #003d82;
+  --primary-color: #1e3a8a;
+  --secondary-color: #e5f2f3;
+  --text-color: #333333;
+}
+
+body,
+html {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", "Meiryo", "Yu Gothic",
+    "MS PGothic", sans-serif;
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--link-hover-color);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+a:visited {
+  color: var(--link-color);
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: var(--background);
+}
+
+/* Foreground */
+.hljs,
+.hljs-subst,
+.hljs-typing,
+.hljs-variable,
+.hljs-template-variable {
+  color: var(--foreground);
+}
+
+/* Comment */
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion {
+  color: var(--comment);
+}
+
+/* Cyan */
+.hljs-meta .hljs-doctag,
+.hljs-built_in,
+.hljs-selector-tag,
+.hljs-section,
+.hljs-link,
+.hljs-class {
+  color: var(--cyan);
+}
+
+/* Green */
+.hljs-title {
+  color: var(--green);
+}
+
+/* Orange */
+.hljs-params {
+  color: var(--orange);
+}
+
+/* Pink */
+.hljs-keyword {
+  color: var(--pink);
+}
+
+/* Purple */
+.hljs-literal,
+.hljs-number {
+  color: var(--purple);
+}
+
+/* Red */
+.hljs-regexp {
+  color: var(--red);
+}
+
+/* Yellow */
+.hljs-string,
+.hljs-name,
+.hljs-type,
+.hljs-attr,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition,
+.hljs-template-tag {
+  color: var(--yellow);
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-title,
+.hljs-section,
+.hljs-doctag,
+.hljs-type,
+.hljs-name,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-params,
+.hljs-emphasis {
+  font-style: italic;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0.5em 0 0 0;
+  color: var(--cyan);
+  font-weight: bold;
+}
+h1 strong,
+h2 strong,
+h3 strong,
+h4 strong,
+h5 strong,
+h6 strong {
+  font-weight: inherit;
+}
+
+hr {
+  height: 0;
+  padding-top: 0.25em;
+}
+
+h1 {
+  font-size: 1.6em;
+}
+
+h2 {
+  font-size: 1.3em;
+  margin-bottom: 0.3em; /* h2の下の余白を減らす */
+}
+
+h3 {
+  font-size: 0.8em;
+}
+
+h4 {
+  font-size: 0.7em;
+}
+
+h5 {
+  font-size: 0.5em;
+}
+
+h6 {
+  font-size: 0.5em;
+}
+
+p,
+blockquote {
+  margin: 1em 0 0 0;
+}
+
+ul,
+ol {
+  margin: 0.5em 0 0 0; /* リスト全体の上下マージンを調整 */
+  padding-left: 1.5em; /* 左のパディングを調整 */
+}
+
+ul > li,
+ol > li {
+  margin: 0.2em 0; /* リストアイテム間のマージンを縮小 */
+  color: var(--foreground);
+}
+ul > li > p,
+ol > li > p {
+  margin: 0.2em 0; /* リストアイテム内の段落のマージンを縮小 */
+}
+
+code {
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8em;
+  letter-spacing: 0;
+  margin: -0.1em 0.15em;
+  padding: 0.1em 0.2em;
+  vertical-align: baseline;
+  color: var(--purple);
+  background-color: var(--current-line);
+}
+
+pre {
+  display: block;
+  margin: 1em 0 0 0;
+  min-height: 1em;
+  overflow: visible;
+  line-height: 1.15;
+}
+pre code {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 100%;
+  padding: 0.5em;
+  font-size: 0.7em;
+}
+pre code svg[data-marp-fitting="svg"] {
+  max-height: calc(580px - 1em);
+}
+
+blockquote {
+  margin: 0 10 0 0;
+  padding: 0 1em;
+  border-left: 1px solid #999;
+  border-width: 0.2em;
+  color: var(--foreground);
+}
+blockquote::before {
+  top: 0;
+  left: 0;
+}
+blockquote::after {
+  right: 0;
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+mark {
+  background: transparent;
+}
+
+table {
+  border-spacing: 10%;
+  border-collapse: collapse;
+  margin: 20px auto;
+  border-width: 2px;
+  border-style: solid;
+  padding-inline: 6px;
+  padding-top: 6px;
+  padding-bottom: 0px;
+  width: 80%; /* テーブルの幅を80%に設定 */
+}
+table th,
+table td {
+  border-width: 2px;
+  border-style: solid;
+  padding-inline: 12px;
+  padding-top: 6px;
+  padding-bottom: 0px;
+  border-color: var(--cyan);
+}
+
+table thead th {
+  background: var(--cyan);
+  color: var(--background);
+}
+
+section {
+  font-size: 25px;
+  font-family: "Lato", sans-serif;
+  letter-spacing: 0.5px;
+  padding: 20px;
+  color: var(--foreground);
+  background-color: var(--background);
+}
+section > *:first-child,
+section > header:first-child + * {
+  margin-top: 0;
+}
+section > h2 + * {
+  /* h2の直後の要素の上の余白を調整 */
+  margin-top: 0.5em;
+}
+section a,
+section mark {
+  color: var(--cyan);
+  text-decoration: none;
+}
+a:hover,
+a:active,
+a:focus {
+  text-decoration: underline;
+}
+section code {
+  background: var(--current-line);
+  color: var(--purple);
+}
+section h1 strong,
+section h2 strong,
+section h3 strong,
+section h4 strong,
+section h5 strong,
+section h6 strong {
+  color: var(--cyan);
+}
+section pre > code {
+  background: var(--current-line);
+}
+section header,
+section footer,
+section section::after,
+section blockquote::before,
+section blockquote::after {
+  color: var(--cyan);
+}
+
+header,
+footer,
+section::after {
+  box-sizing: border-box;
+  font-size: 66%;
+  height: 70px;
+  line-height: 50px;
+  overflow: hidden;
+  padding: 10px 25px;
+  position: absolute;
+}
+
+header {
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+footer {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  line-height: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 0;
+  overflow: hidden;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  background: linear-gradient(
+    to right,
+    #fe4f5c 0%,
+    #fe4f5c 25%,
+    #2e63d9 25%,
+    #2e63d9 50%,
+    #ffe103 50%,
+    #ffe103 75%,
+    #74dbd6 75%,
+    #74dbd6 100%
+  );
+}
+
+footer a,
+footer p {
+  display: none;
+}
+
+section {
+  @extend .markdown-body;
+
+  align-items: stretch;
+  background: var(--background);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  font-size: 25px;
+  height: 720px;
+  justify-content: top;
+  padding: 30px 60px;
+  width: 1280px;
+
+  > *:last-child,
+  &[data-footer] > :nth-last-child(2) {
+    margin-bottom: 0;
+  }
+
+  > *:first-child,
+  > header:first-child + * {
+    margin-top: 0;
+  }
+
+  &::after {
+    position: absolute;
+    padding: 0;
+    right: 30px;
+    bottom: 21px;
+    font-size: 24px;
+    color: var(--cyan);
+  }
+
+  &.invert {
+    background-color: var(--foreground);
+    color: var(--background);
+
+    &::after {
+      color: #999;
+    }
+
+    img {
+      background-color: transparent;
+    }
+  }
+}
+
+/* 枠線のないテーブル用のスタイル */
+.borderless-table table,
+.borderless-table th,
+.borderless-table td {
+  border: none;
+  background: none;
+  padding: 5px 10px;
+}
+
+.borderless-table table {
+  width: 80%; /* 枠線のないテーブルの幅も80%に設定 */
+}
+
+/* すべてのテーブルセルの背景を透明にする */
+table th,
+table td {
+  background: transparent !important;
+}
+
+/* 基本スタイル */
+section {
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  padding: 40px;
+  color: var(--text-color);
+}
+
+/* 表紙スライド */
+section.title {
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.title h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+section.title .date {
+  font-size: 1.2em;
+  color: #666;
+}
+
+/* セクションタイトルスライド */
+section.section {
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section.section h1 {
+  font-size: 2.2em;
+}
+
+/* 通常スライド */
+section.slide {
+  background-color: white;
+}
+
+section.slide h1 {
+  font-size: 1.8em;
+  color: var(--primary-color);
+  margin-bottom: 1em;
+}
+
+/* フッター */
+section::after {
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+  font-size: 0.8em;
+  color: #666;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* コピーライト */
+.copyright {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 0.8em;
+  color: #666;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "penguin-slide-template",
+  "version": "1.0.0",
+  "description": "Marpを使用したプレゼンテーションスライドのテンプレート",
+  "scripts": {
+    "preview": "bunx @marp-team/marp-cli --theme themes/marp-penguin-slide.css slide/penguin-slide-template.md --preview --watch",
+    "serve": "bunx @marp-team/marp-cli --theme themes/marp-penguin-slide.css ./slide --html --watch --server",
+    "build": "bunx @marp-team/marp-cli --theme themes/marp-penguin-slide.css slide/penguin-slide-template.md --pdf",
+    "build:pptx": "bunx @marp-team/marp-cli --theme themes/marp-penguin-slide.css slide/penguin-slide-template.md --pptx",
+    "tunnel": "bunx cloudflared tunnel --no-autoupdate --url http://localhost:8080",
+    "start": "concurrently \"bun serve\" \"bun tunnel\""
+  },
+  "keywords": [
+    "marp",
+    "slides",
+    "presentation"
+  ],
+  "author": "PENGUIN GARAGE",
+  "license": "MIT",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^3.4.0",
+    "concurrently": "^8.2.2",
+    "cloudflared": "^0.5.1"
+  }
+}
